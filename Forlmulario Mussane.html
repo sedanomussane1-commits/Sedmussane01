@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Inscrição em Evento</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #44c5db;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        fieldset {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        legend {
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 0 10px;
+            font-size: 1.2em;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+        
+        .checkbox-group {
+            margin: 15px 0;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: normal;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .required {
+            color: #e74c3c;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button[type="submit"] {
+            background-color: #2ecc71;
+            color: white;
+        }
+        
+        button[type="submit"]:hover {
+            background-color: #27ae60;
+        }
+        
+        button[type="reset"] {
+            background-color: #e74c3c;
+            color: white;
+        }
+        
+        button[type="reset"]:hover {
+            background-color: #c0392b;
+        }
+        
+        .form-note {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+        
+        /* Estilos da barra de menu */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .menu-toggle {
+            background: #2c3e50;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .menu-toggle:hover {
+            background: #3498db;
+            transform: scale(1.05);
+        }
+        
+        .nav-list {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            list-style: none;
+            width: 250px;
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .nav-list.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .nav-item {
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.3s;
+        }
+        
+        .nav-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .nav-item:last-child {
+            border-bottom: none;
+        }
+        
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            color: #2c3e50;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .nav-link:hover {
+            color: #3498db;
+            padding-left: 25px;
+        }
+        
+        .nav-link i {
+            font-size: 1.2em;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* Animação para o menu */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Para todos os dispositivos - menu sempre oculto inicialmente */
+        .nav-list {
+            display: none;
+        }
+        
+        .nav-list.active {
+            display: block;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .button-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+            
+            .nav-list {
+                width: 100%;
+            }
+            
+            .menu-toggle {
+                width: 50px;
+            }
+        }
+        
+        /* Para tablets */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .nav-list {
+                width: 280px;
+            }
+        }
+        
+        /* Para PC - menu hamburger sempre disponível mas oculto */
+        @media (min-width: 1025px) {
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .nav-list {
+                width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Barra de Menu Hamburger Corrigida -->
+        <nav class="navbar">
+            <button class="menu-toggle" title="Abrir menu de navegação">
+                ☰
+            </button>
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="Mussane Galeria (2).html" class="nav-link">Galeria</a>
+                </li>
+                <li class="nav-item">
+                    <a href="CV Mussane 01.html" class="nav-link">Currículo</a>
+                </li>
+                <li class="nav-item">
+                    <a href="Forlmulario Mussane.html" class="nav-link">Formulário</a>
+                </li>
+            </ul>
+        </nav>
+
+        <h1>Formulário de Inscrição em Evento</h1>
+        
+        <form action="processar.php" method="POST">
+            <!-- Dados Pessoais -->
+            <fieldset>
+                <legend>Dados Pessoais</legend>
+                
+                <div class="form-group">
+                    <label for="nome">Nome Completo <span class="required">*</span></label>
+                    <input type="text" id="nome" name="nome" required placeholder="Insira seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">E-mail <span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="exemplo@email.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefone">Telefone <span class="required">*</span></label>
+                    <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX">
+                </div>
+            </fieldset>
+            
+            <!-- Workshop -->
+            <fieldset>
+                <legend>Seleção de Workshop</legend>
+                
+                <div class="form-group">
+                    <label for="workshop">Workshop <span class="required">*</span></label>
+                    <select id="workshop" name="workshop" required>
+                        <option value="">-- Selecione um workshop --</option>
+                        <option value="frontend">Desenvolvimento Frontend</option>
+                        <option value="backend">Desenvolvimento Backend</option>
+                        <option value="mobile">Desenvolvimento Mobile</option>
+                        <option value="ux">UX/UI Design</option>
+                        <option value="dados">Ciência de Dados</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comentarios">Observações</label>
+                    <textarea id="comentarios" name="comentarios" rows="4" placeholder="Alguma observação ou necessidade especial..."></textarea>
+                </div>
+            </fieldset>
+            
+            <!-- Termos e Condições -->
+            <fieldset>
+                <legend>Termos e Condições</legend>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="termos" value="aceito" required>
+                        Li e aceito os <a href="#" target="_blank">termos e condições</a> do evento <span class="required">*</span>
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" name="newsletter" value="sim">
+                        Desejo receber informações sobre futuros eventos e novidades
+                    </label>
+                </div>
+            </fieldset>
+            
+            <!-- Botões -->
+            <div class="button-group">
+                <button type="reset">Limpar Formulário</button>
+                <button type="submit">Enviar Inscrição</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // JavaScript para funcionalidade do menu
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navList = document.querySelector('.nav-list');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            // Alternar menu hamburger - só aparece ao clicar nas três barras
+            menuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                navList.classList.toggle('active');
+            });
+            
+            // Fechar menu ao clicar fora dele
+            document.addEventListener('click', function(event) {
+                const isClickInsideNav = navList.contains(event.target) || menuToggle.contains(event.target);
+                
+                if (!isClickInsideNav) {
+                    navList.classList.remove('active');
+                }
+            });
+            
+            // Fechar menu ao clicar em um link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    navList.classList.remove('active');
+                });
+            });
+            
+            // Prevenir que o menu abra com duplo clique acidental
+            let lastClickTime = 0;
+            menuToggle.addEventListener('click', function(e) {
+                const currentTime = new Date().getTime();
+                if (currentTime - lastClickTime < 300) {
+                    e.preventDefault();
+                }
+                lastClickTime = currentTime;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeria Multimédia Colorida</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6a11cb;
+            --secondary: #2575fc;
+            --accent: #ff3e6c;
+            --success: #00d2a8;
+            --warning: #ffbd3d;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --gray: #6c757d;
+            --shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --gradient-accent: linear-gradient(135deg, var(--accent) 0%, var(--warning) 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f5 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Efeito de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(106, 17, 203, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+        
+        header {
+            background: var(--gradient);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,197.3C1248,203,1344,149,1392,122.7L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(45deg, #ffffff, #ffd6e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .section {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 1px solid rgba(255, 255, 255, 0.5);
+            border-left: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--gradient);
+        }
+        
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(106, 17, 203, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+        }
+        
+        h2 i {
+            color: var(--accent);
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            background: linear-gradient(to right, rgba(248, 249, 250, 0.8), rgba(255, 255, 255, 0.9));
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 150px;
+            background: var(--gradient);
+            border-radius: 50%;
+            transform: translate(40%, -40%);
+            opacity: 0.1;
+        }
+        
+        .profile-img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid transparent;
+            background: var(--gradient) padding-box, var(--gradient) border-box;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 15px 30px rgba(106, 17, 203, 0.3);
+        }
+        
+        .profile-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .profile-text h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .profile-text p {
+            margin-bottom: 1rem;
+            color: var(--gray);
+        }
+        
+        .media-block {
+            background: linear-gradient(to bottom, rgba(248, 249, 250, 0.8), rgba(255, 255, 255, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 4px solid;
+            border-image: var(--gradient-accent) 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .media-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-accent);
+        }
+        
+        .media-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        audio, video {
+            width: 100%;
+            border-radius: 15px;
+            margin: 1.5rem 0;
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box, var(--gradient) border-box;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .gallery-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            padding: 1.5rem;
+            text-align: center;
+            background: linear-gradient(to bottom, white, #f8f9fa);
+        }
+        
+        .gallery-caption h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .gallery-caption p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--gradient-accent);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 62, 108, 0.4);
+            z-index: 2;
+        }
+        
+        footer {
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+            color: white;
+            text-align: center;
+            padding: 3rem;
+            margin-top: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .social-links a:hover {
+            color: white;
+            transform: translateY(-5px);
+            background: var(--gradient-accent);
+            box-shadow: 0 10px 20px rgba(255, 62, 108, 0.4);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--gradient-accent);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 10px 25px rgba(255, 62, 108, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            border: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px rgba(255, 62, 108, 0.6);
+        }
+        
+        /* Menu Hamburger */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .menu li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu li a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            transition: var(--transition);
+            z-index: -1;
+        }
+        
+        .menu li a:hover {
+            color: white;
+        }
+        
+        .menu li a:hover::before {
+            left: 0;
+        }
+        
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        .hamburger:hover {
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .section {
+                padding: 1.5rem;
+            }
+            
+            .hamburger {
+                display: block;
+            }
+            
+            .menu {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 80%;
+                max-width: 300px;
+                text-align: center;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                border-radius: 0 0 0 10px;
+                transition: var(--transition);
+                padding: 2rem 0;
+                gap: 0;
+            }
+            
+            .menu.active {
+                right: 0;
+            }
+            
+            .menu li {
+                width: 100%;
+            }
+            
+            .menu li a {
+                display: block;
+                padding: 1rem;
+                border-radius: 0;
+            }
+            
+            .menu li a:hover {
+                background: var(--gradient);
+                color: white;
+            }
+        }
+        
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        /* Botões personalizados */
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.6);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-accent {
+            background: var(--gradient-accent);
+            box-shadow: 0 5px 15px rgba(255, 62, 108, 0.4);
+        }
+        
+        .btn-accent:hover {
+            box-shadow: 0 10px 25px rgba(255, 62, 108, 0.6);
+        }
+        
+        /* Estilos para a galeria de vídeos */
+        .video-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .video-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .video-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+        
+        .video-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .video-item:hover .video-thumbnail img {
+            transform: scale(1.1);
+        }
+        
+        .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.9);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .video-item:hover .play-icon {
+            background: var(--accent);
+            color: white;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+        
+        .video-info {
+            padding: 1.5rem;
+            background: linear-gradient(to bottom, white, #f8f9fa);
+        }
+        
+        .video-info h3 {
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .video-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .video-duration {
+            display: inline-block;
+            background: var(--gradient);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* Modal para visualização de imagens e vídeos */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+        
+        .modal-content img, .modal-content video {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .close-modal:hover {
+            color: var(--accent);
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .modal-caption {
+            color: white;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        /* Placeholders coloridos */
+        .color-placeholder {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .placeholder-1 { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+        .placeholder-2 { background: linear-gradient(135deg, #ff3e6c, #ffbd3d); }
+        .placeholder-3 { background: linear-gradient(135deg, #00d2a8, #2575fc); }
+        .placeholder-4 { background: linear-gradient(135deg, #ffbd3d, #ff3e6c); }
+    </style>
+</head>
+<body>
+    <!-- Efeito de partículas -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Menu de Navegação -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Multimédia Colorida</div>
+            <ul class="menu">
+                <li><a href="Mussane Galeria (2).html">Mussane Galeria</a></li>
+                <li><a href="CV Mussane 01.html">CV Mussane</a></li>
+                <li><a href="Forlmulario Mussane.html">Formulário</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <header>
+        <h1><i class="fas fa-photo-video"></i> Galeria Multimédia</h1>
+        <p class="tagline">Uma experiência interativa colorida com elementos multimédia vibrantes</p>
+    </header>
+    
+    <div class="container">
+        <section class="section fade-in">
+            <h2><i class="fas fa-user-circle"></i> Imagem de Perfil</h2>
+            <div class="profile-section">
+                <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.12 (1).jpeg" alt="Foto de perfil" class="profile-img" data-modal-type="image" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.12 (1).jpeg" data-modal-caption="Foto de perfil de Sedano Mussane">
+                <div class="profile-text">
+                    <h3>Sedano Mussane</h3>
+                    <p>Esta Foto do perfil Mostra o representante do Curriculo.</p>
+                    <p>A imagem mostra uma pessoa sorridente, transmitindo uma sensação de acessibilidade e confiança. As imagens de perfil são elementos importantes em redes sociais, fóruns e sistemas de gestão.</p>
+                    <button class="btn" id="showProfileImg"><i class="fas fa-eye"></i> Mostrar Imagem</button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="section fade-in delay-1">
+            <h2><i class="fas fa-music"></i> Elementos de Áudio</h2>
+            <div class="media-block">
+                <h3 class="media-title"><i class="fas fa-play-circle"></i> Música Relaxante</h3>
+                <p>Este é um ficheiro de áudio que reproduz uma melodia calmante. Os elementos de áudio são essenciais para criar experiências multimédia completas, permitindo adicionar música, narrações ou efeitos sonoros a uma página web.</p>
+                <audio controls>
+                    <source src="c:\Users\sedanoMussane\Downloads\Shot Callin.mp3" type="audio/mpeg">
+                    Seu navegador não suporta o elemento de áudio.
+                </audio>
+                <p>O elemento &lt;audio&gt; do HTML5 permite incorporar conteúdo de áudio diretamente nas páginas web, sem necessidade de plugins externos.</p>
+                <button class="btn btn-accent"><i class="fas fa-share-alt"></i> Partilhar Áudio</button>
+            </div>
+        </section>
+        
+        <section class="section fade-in delay-2">
+            <h2><i class="fas fa-film"></i> Elementos de Vídeo</h2>
+            <div class="media-block">
+                <h3 class="media-title"><i class="fas fa-video"></i> Vídeo Demonstrativo</h3>
+                <p>Estes videos mostram a minha visita a uma agência de carros. Os vídeos são poderosas ferramentas de comunicação, capazes de transmitir informações complexas de forma eficiente e envolvente.</p>
+                <video controls>
+                    <source src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 10.46.24.mp4" type="video/mp4">
+                    Seu navegador não suporta o elemento de vídeo.
+                </video>
+                <p>O elemento &lt;video&gt; do HTML5 permite a incorporação direta de conteúdo de vídeo, com controles de reprodução integrados.</p>
+            </div>
+        </section>
+        
+        <section class="section fade-in delay-1">
+            <h2><i class="fas fa-images"></i> Galeria de Fotos</h2>
+            <p>Explore nossa coleção de imagens cuidadosamente selecionadas. Cada foto conta uma história única e representa diferentes aspectos do mundo multimédia.</p>
+            
+            <div class="gallery">
+                <div class="gallery-item" data-modal-type="image" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.07.jpeg" data-modal-caption="Mercedes Benz 450 slc">
+                    <span class="badge">Nova</span>
+                    <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.07.jpeg" alt="Mercedes" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Mercedes</h3>
+                        <p>Foto de uma mercedes Benz 450 slc.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-modal-type="image" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.10.jpeg" data-modal-caption="Jaguar XJ6 1994">
+                    <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.10.jpeg" alt="Jaguar" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Jaguar</h3>
+                        <p>Foto de uma Jaguar XJ6 1994.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-modal-type="image" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.06 (1).jpeg" data-modal-caption="Minha foto tirada em casa do meu amigo Jorge">
+                    <span class="badge">Popular</span>
+                    <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.06 (1).jpeg" alt="Minha foto" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Minha foto</h3>
+                        <p>Minha foto tirada em casa do meu amigo Jorge.</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item" data-modal-type="image" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.12.jpeg" data-modal-caption="Minha foto, tirada na festa de uma amiga">
+                    <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Image 2025-10-09 at 17.55.12.jpeg" alt="Minha foto" class="gallery-img">
+                    <div class="gallery-caption">
+                        <h3>Minha foto</h3>
+                        <p>Minha foto, tirada na festa de uma amiga.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn"><i class="fas fa-images"></i> Ver Mais Fotos</button>
+            </div>
+        </section>
+        
+        <section class="section fade-in delay-2">
+            <h2><i class="fas fa-video"></i> Galeria de Vídeos</h2>
+            <p>Nossa coleção de vídeos apresenta diversos conteúdos multimédia, desde tutoriais até demonstrações criativas.</p>
+            
+            <div class="video-gallery">
+                <div class="video-item" data-modal-type="video" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.05.mp4" data-modal-caption="Festa do meu amigo">
+                    <div class="video-thumbnail">
+                        <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.05.mp4" alt="Festa do Amigo" class="gallery-img">
+                        <div class="play-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Festa</h3>
+                        <p>Festa do meu amigo.</p>
+                        <span class="video-duration">10:25</span>
+                    </div>
+                </div>
+                
+                <div class="video-item" data-modal-type="video" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.07.mp4" data-modal-caption="Presente de aniversario da minha mãe">
+                    <div class="video-thumbnail">
+                        <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.07.mp4" alt="Presente de Aniversário" class="gallery-img">
+                        <div class="play-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>Presente</h3>
+                        <p>Presente de aniversario da minha mãe.</p>
+                        <span class="video-duration">15:42</span>
+                    </div>
+                </div>
+                
+                <div class="video-item" data-modal-type="video" data-modal-src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.10.mp4" data-modal-caption="CASAMENTO dos meus tios">
+                    <div class="video-thumbnail">
+                        <img src="c:\Users\sedanoMussane\OneDrive\Ambiente de Trabalho\JUNIOR MUSSANE\WhatsApp Video 2025-10-16 at 17.17.10.mp4" alt="Casamento dos Tios" class="gallery-img">
+                        
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3>CASAMENTO</h3>
+                        <p>CASAMENTO dos meus tios.</p>
+                        <span class="video-duration">08:17</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn"><i class="fas fa-film"></i> Ver Mais Vídeos</button>
+            </div>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <h3>Galeria Multimédia Colorida</h3>
+            <p>Uma experiência completa e vibrante com elementos de áudio, vídeo e imagem.</p>
+            
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            
+            <p>&copy; 2025 Galeria Multimédia Colorida. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Modal para visualização de mídia -->
+    <div class="modal" id="mediaModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <img id="modalImage" style="display: none;">
+            <video id="modalVideo" controls style="display: none;"></video>
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Inicialização da aplicação
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar partículas
+            createParticles();
+            
+            // Inicializar menu hamburger
+            initHamburgerMenu();
+            
+            // Inicializar botão voltar ao topo
+            initBackToTop();
+            
+            // Inicializar modal para visualização de mídia
+            initMediaModal();
+            
+            // Inicializar animações de entrada
+            initAnimations();
+        });
+        
+        // Função para criar partículas
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const colors = ['#6a11cb', '#2575fc', '#ff3e6c', '#ffbd3d', '#00d2a8'];
+            
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 30 + 10;
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.background = color;
+                particle.style.opacity = Math.random() * 0.3 + 0.1;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Menu hamburger
+        function initHamburgerMenu() {
+            const hamburger = document.getElementById('hamburger');
+            const menu = document.querySelector('.menu');
+            
+            hamburger.addEventListener('click', () => {
+                menu.classList.toggle('active');
+                hamburger.innerHTML = menu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+        }
+        
+        // Botão voltar ao topo
+        function initBackToTop() {
+            const backToTop = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTop.classList.add('active');
+                } else {
+                    backToTop.classList.remove('active');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        // Modal para visualização de mídia
+        function initMediaModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeModal = document.getElementById('closeModal');
+            const showProfileImg = document.getElementById('showProfileImg');
+            
+            // Abrir modal para imagens e vídeos
+            document.querySelectorAll('.gallery-item, .video-item, .profile-img').forEach(item => {
+                item.addEventListener('click', () => {
+                    const type = item.getAttribute('data-modal-type');
+                    const src = item.getAttribute('data-modal-src');
+                    const caption = item.getAttribute('data-modal-caption');
+                    
+                    if (type === 'image') {
+                        modalImage.style.display = 'block';
+                        modalVideo.style.display = 'none';
+                        modalImage.src = src;
+                    } else if (type === 'video') {
+                        modalImage.style.display = 'none';
+                        modalVideo.style.display = 'block';
+                        modalVideo.innerHTML = `<source src="${src}" type="video/mp4">`;
+                        modalVideo.load();
+                    }
+                    
+                    modalCaption.textContent = caption;
+                    modal.classList.add('active');
+                });
+            });
+            
+            // Botão para mostrar imagem de perfil
+            if (showProfileImg) {
+                showProfileImg.addEventListener('click', () => {
+                    const profileImg = document.querySelector('.profile-img');
+                    profileImg.click();
+                });
+            }
+            
+            // Fechar modal
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+                modalVideo.pause();
+            });
+            
+            // Fechar modal ao clicar fora do conteúdo
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    modalVideo.pause();
+                }
+            });
+            
+            // Fechar modal com a tecla ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    modal.classList.remove('active');
+                    modalVideo.pause();
+                }
+            });
+        }
+        
+        // Animações de entrada
+        function initAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.fade-in').forEach(el => {
+                el.style.opacity = 0;
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>
